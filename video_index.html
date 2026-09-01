@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reproduzir Vídeo com Enter</title>
+<style>
+  :root {
+    --azul-profundo: #0a1650;
+    --azul-teia: #142a7a;
+    --vermelho: #c8102e;
+    --vermelho-escuro: #7a0d1f;
+    --branco: #f5f5f7;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--branco);
+    background: radial-gradient(circle at 50% 20%, var(--azul-teia) 0%, var(--azul-profundo) 55%, #05081f 100%);
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+
+  .teia-svg {
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    opacity: 0.16;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .teia-tl { top: -140px; left: -140px; }
+  .teia-br { bottom: -140px; right: -140px; transform: rotate(180deg); }
+
+
+  .personagem {
+    position: fixed;
+    z-index: 0;
+    filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+    pointer-events: none;
+  }
+  .p-spider-icon   { width: 90px;  top: 6%;  left: 4%;  opacity: 0.35; }
+  .p-homem-1       { width: 150px; bottom: 4%; left: 3%;  opacity: 0.9; }
+  .p-homem-2       { width: 190px; top: 8%;  right: 4%;  opacity: 0.92; }
+  .p-homem-3       { width: 170px; bottom: 5%; right: 3%; opacity: 0.9; }
+  .p-gwen-1        { width: 120px; top: 42%; left: 1%;   opacity: 0.85; }
+  .p-gwen-2        { width: 140px; top: 40%; right: 1%;  opacity: 0.85; }
+
+  .coracao {
+    position: fixed;
+    z-index: 0;
+    color: var(--vermelho);
+    opacity: 0.55;
+    text-shadow: 0 0 12px rgba(200,16,46,0.7);
+    animation: flutuar 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .coracao:nth-child(odd) { animation-duration: 7.5s; }
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+
+  .conteudo {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+  }
+
+  h1 {
+    font-size: 30px;
+    margin: 0 0 8px;
+    letter-spacing: 0.5px;
+  }
+  h1 span { color: var(--vermelho); }
+
+  .subtitulo {
+    color: #c9cdf0;
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+
+  .player-card {
+    background: rgba(10, 22, 80, 0.55);
+    border: 2px solid var(--vermelho);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 0 0 6px rgba(20,42,122,0.35), 0 20px 50px rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+  }
+
+  video {
+    max-width: 100%;
+    width: 640px;
+    border-radius: 8px;
+    display: block;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .dica {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #b9bde0;
+  }
+
+  .teia-divisor {
+    width: 60px;
+    height: 2px;
+    background: var(--vermelho);
+    margin: 22px auto;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 700px) {
+    .personagem { display: none; }
+    video { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+  <svg class="teia-svg teia-tl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="white" stroke-width="1">
+      <circle cx="0" cy="0" r="40"/><circle cx="0" cy="0" r="80"/><circle cx="0" cy="0" r="120"/><circle cx="0" cy="0" r="160"/><circle cx="0" cy="0" r="200"/>
+      <line x1="0" y1="0" x2="200" y2="0"/>
+      <line x1="0" y1="0" x2="200" y2="70"/>
+      <line x1="0" y1="0" x2="200" y2="140"/>
+      <line x1="0" y1="0" x2="200" y2="200"/>
+      <line x1="0" y1="0" x2="140" y2="200"/>
+      <line x1="0" y1="0" x2="70" y2="200"/>
+      <line x1="0" y1="0" x2="0" y2="200"/>
+    </g>
+  </svg>
+  <svg class="teia-svg teia-br" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="white" stroke-width="1">
+      <circle cx="0" cy="0" r="40"/><circle cx="0" cy="0" r="80"/><circle cx="0" cy="0" r="120"/><circle cx="0" cy="0" r="160"/><circle cx="0" cy="0" r="200"/>
+      <line x1="0" y1="0" x2="200" y2="0"/>
+      <line x1="0" y1="0" x2="200" y2="70"/>
+      <line x1="0" y1="0" x2="200" y2="140"/>
+      <line x1="0" y1="0" x2="200" y2="200"/>
+      <line x1="0" y1="0" x2="140" y2="200"/>
+      <line x1="0" y1="0" x2="70" y2="200"/>
+      <line x1="0" y1="0" x2="0" y2="200"/>
+    </g>
+  </svg>
+
+  <img class="personagem p-spider-icon" src="spider-icon.png" alt="">
+  <img class="personagem p-homem-1" src="spiderman-1.png" alt="">
+  <img class="personagem p-homem-2" src="spiderman-2.png" alt="">
+  <img class="personagem p-homem-3" src="spiderman-3.png" alt="">
+  <img class="personagem p-gwen-1" src="spidergwen-1.png" alt="">
+  <img class="personagem p-gwen-2" src="spidergwen-2.png" alt="">
+
+  <div class="coracao" style="top:14%; left:22%; font-size:26px;">❤</div>
+  <div class="coracao" style="top:70%; left:16%; font-size:20px;">❤</div>
+  <div class="coracao" style="top:20%; right:20%; font-size:22px;">❤</div>
+  <div class="coracao" style="top:65%; right:24%; font-size:28px;">❤</div>
+  <div class="coracao" style="top:88%; left:46%; font-size:18px;">❤</div>
+  <div class="coracao" style="top:10%; left:48%; font-size:16px;">❤</div>
+
+  <div class="conteudo">
+    <h1>Pressione <span>Enter</span> para reproduzir o vídeo</h1>
+    <p class="subtitulo">Sua vizinhança amigável de vídeos, com direito a teia e tudo</p>
+
+    <div class="player-card">
+      <video id="meuVideo" width="640" controls>
+        <source src="about_us__.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos HTML5.
+      </video>
+    </div>
+
+    <div class="teia-divisor"></div>
+    <p class="dica">(Certifique-se de que o vídeo está carregado e pressione Enter)</p>
+  </div>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        const video = document.getElementById("meuVideo");
+        if (video.paused) {
+          video.play().catch(err => console.error("Erro ao tentar reproduzir o vídeo:", err));
+        } else {
+          video.pause();
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
