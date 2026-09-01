@@ -37,7 +37,6 @@
     padding: 60px 20px;
   }
 
-  /* --- TEIAS DE FUNDO --- */
   .teia-svg {
     position: fixed;
     width: 520px;
@@ -49,7 +48,6 @@
   .teia-tl { top: -140px; left: -140px; }
   .teia-br { bottom: -140px; right: -140px; transform: rotate(180deg); }
 
-  /* --- PERSONAGENS DECORATIVOS --- */
   .personagem {
     position: fixed;
     z-index: 0;
@@ -63,7 +61,6 @@
   .p-gwen-1        { width: 120px; top: 42%; left: 1%;   opacity: 0.85; }
   .p-gwen-2        { width: 140px; top: 40%; right: 1%;  opacity: 0.85; }
 
-  /* --- CORAÇÕES FLUTUANTES --- */
   .coracao {
     position: fixed;
     z-index: 0;
@@ -79,7 +76,6 @@
     50% { transform: translateY(-18px); }
   }
 
-  /* --- CONTEÚDO PRINCIPAL --- */
   .conteudo {
     position: relative;
     z-index: 1;
@@ -129,7 +125,6 @@
   .teia-divisor {
     width: 60px;
     height: 2px;
-    background: var(--vermelho);
     margin: 22px auto;
     opacity: 0.6;
   }
@@ -142,7 +137,6 @@
 </head>
 <body>
 
-  <!-- Teias -->
   <svg class="teia-svg teia-tl" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
     <g fill="none" stroke="white" stroke-width="1">
       <circle cx="0" cy="0" r="40"/><circle cx="0" cy="0" r="80"/><circle cx="0" cy="0" r="120"/><circle cx="0" cy="0" r="160"/><circle cx="0" cy="0" r="200"/>
@@ -168,7 +162,7 @@
     </g>
   </svg>
 
-  <!-- Personagens -->
+
   <img class="personagem p-spider-icon" src="spider-icon.png" alt="">
   <img class="personagem p-homem-1" src="spiderman-1.png" alt="">
   <img class="personagem p-homem-2" src="spiderman-2.png" alt="">
@@ -176,7 +170,6 @@
   <img class="personagem p-gwen-1" src="spidergwen-1.png" alt="">
   <img class="personagem p-gwen-2" src="spidergwen-2.png" alt="">
 
-  <!-- Corações flutuantes -->
   <div class="coracao" style="top:14%; left:22%; font-size:26px;">❤</div>
   <div class="coracao" style="top:70%; left:16%; font-size:20px;">❤</div>
   <div class="coracao" style="top:20%; right:20%; font-size:22px;">❤</div>
@@ -185,8 +178,7 @@
   <div class="coracao" style="top:10%; left:48%; font-size:16px;">❤</div>
 
   <div class="conteudo">
-    <h1>Pressione <span>Enter</span> para reproduzir o vídeo</h1>
-    <p class="subtitulo">Sua vizinhança amigável de vídeos, com direito a teia e tudo</p>
+    <h1> Pressione <span>Enter</span> para reproduzir o vídeo</h1>
 
     <div class="player-card">
       <video id="meuVideo" width="640" controls>
@@ -196,7 +188,7 @@
     </div>
 
     <div class="teia-divisor"></div>
-    <p class="dica">(Nossos momentos ❤️)</p>
+    <p class="dica"> Nossos momentos ❤️</p>
   </div>
 
   <script>
